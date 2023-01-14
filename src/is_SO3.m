@@ -2,7 +2,7 @@
 % 3D ROTATION GROUP
 
 function is_SO3(R)
-% Test if a matrix belongs to the SO(3)
+% Test if a matrix belongs to the SO(3) group
 %   R: 3x3 Matrix
     RRT = R * transpose(R)
     % Adress floating-point 0-tolerance
