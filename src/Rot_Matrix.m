@@ -1,6 +1,20 @@
 % ROTATION MATRICES
 % 3 X 3 ROTATION MATRICES 
 
+function [Rotx, Roty, Rotz, Rotx_d, Roty_d, Rotz_d] = Rot_Matrix
+% Uasage:
+%   Call functions as (e.g.): 
+%   [Rotx, Roty, Rotz, Rotx_d, Roty_d, Rotz_d] = Rot_Matrix
+%   Rotx(theta)
+
+Rotx = @Rot_x;
+Roty = @Rot_y;
+Rotz = @Rot_z;
+Rotx_d = @Rot_x_d;
+Roty_d = @Rot_y_d;
+Rotz_d = @Rot_z_d;
+end
+
 % FUNCTIONS OF ROTATION MATRICES - RADIANS
 function [Rx] = Rot_x(theta)
 % Rotation matrix around x-axis
