@@ -2,7 +2,7 @@
 % ROTATION MATRIX ZYZ AND EULER ANGLES FROM A ROTATION MATRIX
 
 function [RotZYZ, RotZYZ_d, EulerAngles] = Euler_Angles
-% Uasage:
+% Usage:
 %   Call functions as (e.g.): 
 %   [RotZYZ, RotZYZ_d, EulerAngles] = Euler_Angles
 %   RotZYZ(phi,theta,psi)

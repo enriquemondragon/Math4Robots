@@ -2,7 +2,7 @@
 % 3 X 3 ROTATION MATRICES 
 
 function [Rotx, Roty, Rotz, Rotx_d, Roty_d, Rotz_d] = Rot_Matrix
-% Uasage:
+% Usage:
 %   Call functions as (e.g.): 
 %   [Rotx, Roty, Rotz, Rotx_d, Roty_d, Rotz_d] = Rot_Matrix
 %   Rotx(theta)

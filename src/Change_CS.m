@@ -2,7 +2,7 @@
 % CARTESIAN, CYLINDRICAL AND SPHERICAL COORDINATES SYSTEMS
 
 function [car2cyl, car2sph, cyl2car, cyl2sph, sph2car, sph2cyl] = Change_CS
-% Uasage:
+% Usage:
 %   Call functions as (e.g.): 
 %   [car2cyl, car2sph, cyl2car, cyl2sph, sph2car, sph2cyl] = Change_CS
 %   car2cyl(x,y,z)

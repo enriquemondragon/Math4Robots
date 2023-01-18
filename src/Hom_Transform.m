@@ -4,7 +4,7 @@
 % HOMOGENEOUS TRANSFORM --> TH = T*R
 
 function [Trans, Rotxg, Rotyg, Rotzg, Rotxg_d, Rotyg_d, Rotzg_d] = Hom_Transform
-% Uasage:
+% Usage:
 %   Call functions as (e.g.): 
 %   [Trans, Rotxg, Rotyg, Rotzg, Rotxg_d, Rotyg_d, Rotzg_d] = Hom_Transform
 %   Trans(t)

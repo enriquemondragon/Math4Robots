@@ -2,7 +2,7 @@
 % ROTATION MATRIX ZYX AND ROLL, PTICH & YAW ANGLES FROM A ROTATION MATRIX
 
 function [RotZYX, RotZYX_d, RollPitchYaw] = Roll_Pitch_Yaw
-% Uasage:
+% Usage:
 %   Call functions as (e.g.): 
 %   [RotZYX, RotZYX_d, RollPitchYaw] = Roll_Pitch_Yaw
 %   RotZYX(phi_r,phi_p,phi_y)
