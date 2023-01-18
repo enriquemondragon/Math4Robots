@@ -1,25 +1,28 @@
 % ZYZ-EULER ANGLE TRANSFORMATION
 % ROTATION MATRIX ZYZ AND EULER ANGLES FROM A ROTATION MATRIX
 
+function [RotZYZ, RotZYZ_d, EulerAngles] = Euler_Angles
+% Uasage:
+%   Call functions as (e.g.): 
+%   [RotZYZ, RotZYZ_d, EulerAngles] = Euler_Angles
+%   RotZYZ(phi,theta,psi)
+
+RotZYZ = @Rot_zyz;
+RotZYZ_d = @Rot_zyz_d;
+EulerAngles = @Euler_angles;
+
+end
+
 function [R_zyz] = Rot_zyz(phi,theta,psi)
 % Generate the rotation matrix ZYZ
 %   phi: angle in radians
 %   theta: angle in radians
 %   psi: angle in radians
 %   R_zyz: rotation matrix ZYZ
-    R_zyz = Rot_z(phi)*Rot_y(theta)*Rot_z(psi)
-    
-    function [Ry] = Rot_y(theta)
-    % Rotation matrix around y-axis
-    %   theta: angle in radians
-        Ry = [cos(theta) 0 sin(theta); 0 1 0; -sin(theta) 0 cos(theta)]; 
-    end
 
-    function [Rz] = Rot_z(theta)
-    % Rotation matrix around z-axis
-    %   theta: angle in radians
-        Rz = [cos(theta) -sin(theta) 0; sin(theta) cos(theta) 0; 0 0 1]; 
-    end
+    [~, Roty, Rotz, ~, ~, ~] = Rot_Matrix
+    R_zyz = Rotz(phi)*Roty(theta)*Rotz(psi)
+  
 end
 
 function [R_zyz] = Rot_zyz_d(phi,theta,psi)
@@ -28,22 +31,10 @@ function [R_zyz] = Rot_zyz_d(phi,theta,psi)
 %   theta: angle in degrees
 %   psi: angle in degrees
 %   R_zyz: rotation matrix ZYZ
-    phi = deg2rad(phi)
-    theta = deg2rad(theta)
-    psi = deg2rad(psi)
-    R_zyz = Rot_z(phi)*Rot_y(theta)*Rot_z(psi)
-    
-    function [Ry] = Rot_y(theta)
-    % Rotation matrix around y-axis
-    %   theta: angle in radians
-        Ry = [cos(theta) 0 sin(theta); 0 1 0; -sin(theta) 0 cos(theta)]; 
-    end
 
-    function [Rz] = Rot_z(theta)
-    % Rotation matrix around z-axis
-    %   theta: angle in radians
-        Rz = [cos(theta) -sin(theta) 0; sin(theta) cos(theta) 0; 0 0 1]; 
-    end
+    [~, ~, ~, ~, Roty_d, Rotz_d] = Rot_Matrix
+    R_zyz = Rotz_d(phi)*Roty_d(theta)*Rotz_d(psi)
+    
 end
 
 function [phi1,theta1,psi1,phi2,theta2,psi2] = Euler_angles(R)
@@ -56,6 +47,7 @@ function [phi1,theta1,psi1,phi2,theta2,psi2] = Euler_angles(R)
 %   phi2: angle in radians
 %   theta2: angle in radians
 %   psi2: angle in radians
+
     [nrows,ncols] = size(R);
     if nrows ~= 3 && ncols ~=3
         error('Euler rotation matrix should be of size (3,3)')
@@ -69,4 +61,5 @@ function [phi1,theta1,psi1,phi2,theta2,psi2] = Euler_angles(R)
     
     psi1 = atan2(R(3,2)/sin(theta1),-R(3,1)/sin(theta1));
     psi2 = atan2(R(3,2)/sin(theta2),-R(3,1)/sin(theta2));
+    
 end

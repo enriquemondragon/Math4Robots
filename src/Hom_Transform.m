@@ -3,6 +3,23 @@
 
 % HOMOGENEOUS TRANSFORM --> TH = T*R
 
+function [Trans, Rotxg, Rotyg, Rotzg, Rotxg_d, Rotyg_d, Rotzg_d] = Hom_Transform
+% Uasage:
+%   Call functions as (e.g.): 
+%   [Trans, Rotxg, Rotyg, Rotzg, Rotxg_d, Rotyg_d, Rotzg_d] = Hom_Transform
+%   Trans(t)
+
+Trans = @tras;
+Rotxg = @Rot_x_g;
+Rotyg = @Rot_y_g;
+Rotzg = @Rot_z_g;
+Rotxg_d = @Rot_x_gd;
+Rotyg_d = @Rot_y_gd;
+Rotzg_d = @Rot_z_gd;
+
+end
+
+%%
 % TRANSLATION MATRIX
 function [T] = tras(t)
 % Translation matrix
@@ -11,9 +28,10 @@ function [T] = tras(t)
     if nrows ~= 3 && ncols ~=1
         error('displacement vector should be of size (3,1)')
     end
-    temp = [eye(3) t]
-    T = [temp; 0 0 0 1]
+    temp = [eye(3) t];
+    T = [temp; 0 0 0 1];
 end
+
 %%
 % FUNCTIONS OF ROTATION MATRICES FOR HOMOGENEOUS TRANSFORMATIONS - RADIANS
 function [Rx] = Rot_x_g(theta)
