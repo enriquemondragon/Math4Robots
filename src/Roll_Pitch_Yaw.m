@@ -1,31 +1,28 @@
 % ZYX ROLL PITCH & YAW ANGLES
 % ROTATION MATRIX ZYX AND ROLL, PTICH & YAW ANGLES FROM A ROTATION MATRIX
 
+function [RotZYX, RotZYX_d, RollPitchYaw] = Roll_Pitch_Yaw
+% Uasage:
+%   Call functions as (e.g.): 
+%   [RotZYX, RotZYX_d, RollPitchYaw] = Roll_Pitch_Yaw
+%   RotZYX(phi_r,phi_p,phi_y)
+
+RotZYX = @Rot_zyx;
+RotZYX_d = @Rot_zyx_d;
+RollPitchYaw = @RPY_angles;
+
+end
+
 function [R_zyx] = Rot_zyx(phi_r,phi_p,phi_y)
 % Generate the rotation matrix ZYZ
 %   phi_r: Roll angle in radians
 %   phi_p: Pitch angle in radians
 %   phi_y: Yaw angle in radians
 %   R_zyz: rotation matrix ZYZ
-    R_zyx = Rot_z(phi_r)*Rot_y(phi_p)*Rot_x(phi_y)
-    
-    function [Rx] = Rot_x(theta)
-    % Rotation matrix around x-axis
-    %   theta: angle in radians
-        Rx = [1 0 0; 0 cos(theta) -sin(theta); 0 sin(theta) cos(theta)]; 
-    end
 
-    function [Ry] = Rot_y(theta)
-    % Rotation matrix around y-axis
-    %   theta: angle in radians
-        Ry = [cos(theta) 0 sin(theta); 0 1 0; -sin(theta) 0 cos(theta)]; 
-    end
+    [Rotx, Roty, Rotz, ~, ~, ~] = Rot_Matrix
+    R_zyx = Rotz(phi_r)*Roty(phi_p)*Rotx(phi_y)
 
-    function [Rz] = Rot_z(theta)
-    % Rotation matrix around z-axis
-    %   theta: angle in radians
-        Rz = [cos(theta) -sin(theta) 0; sin(theta) cos(theta) 0; 0 0 1]; 
-    end
 end
 
 function [R_zyx] = Rot_zyx_d(phi_r,phi_p,phi_y)
@@ -34,28 +31,10 @@ function [R_zyx] = Rot_zyx_d(phi_r,phi_p,phi_y)
 %   phi_p: Pitch angle in degrees
 %   phi_y: Yaw angle in degrees
 %   R_zyz: rotation matrix ZYZ
-    phi_r = deg2rad(phi_r)
-    phi_p = deg2rad(phi_p)
-    phi_y = deg2rad(phi_y)
-    R_zyx = Rot_z(phi_r)*Rot_y(phi_p)*Rot_x(phi_y)
+
+    [~, ~, ~, Rotx_d, Roty_d, Rotz_d] = Rot_Matrix
+    R_zyx = Rotz_d(phi_r)*Roty_d(phi_p)*Rotx_d(phi_y)
     
-    function [Rx] = Rot_x(theta)
-    % Rotation matrix around x-axis
-    %   theta: angle in radians
-        Rx = [1 0 0; 0 cos(theta) -sin(theta); 0 sin(theta) cos(theta)]; 
-    end
-
-    function [Ry] = Rot_y(theta)
-    % Rotation matrix around y-axis
-    %   theta: angle in radians
-        Ry = [cos(theta) 0 sin(theta); 0 1 0; -sin(theta) 0 cos(theta)]; 
-    end
-
-    function [Rz] = Rot_z(theta)
-    % Rotation matrix around z-axis
-    %   theta: angle in radians
-        Rz = [cos(theta) -sin(theta) 0; sin(theta) cos(theta) 0; 0 0 1]; 
-    end
 end
 
 function [roll1,pitch1,yaw1,roll2,pitch2,yaw2] = RPY_angles(R)
@@ -68,6 +47,7 @@ function [roll1,pitch1,yaw1,roll2,pitch2,yaw2] = RPY_angles(R)
 %   roll2: angle in radians
 %   pitch2: angle in radians
 %   yaw2: angle in radians
+
     [nrows,ncols] = size(R);
     if nrows ~= 3 && ncols ~=3
         error('rotation matrix should be of size (3,3)')

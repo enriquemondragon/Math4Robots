@@ -15,6 +15,7 @@ Roty_d = @Rot_y_d;
 Rotz_d = @Rot_z_d;
 end
 
+%%
 % FUNCTIONS OF ROTATION MATRICES - RADIANS
 function [Rx] = Rot_x(theta)
 % Rotation matrix around x-axis
