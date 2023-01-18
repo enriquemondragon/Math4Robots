@@ -1,6 +1,20 @@
 % CHANGE COORDINATE SYSTEMS
 % CARTESIAN, CYLINDRICAL AND SPHERICAL COORDINATES SYSTEMS
 
+function [car2cyl, car2sph, cyl2car, cyl2sph, sph2car, sph2cyl] = Change_CS
+% Uasage:
+%   Call functions as (e.g.): 
+%   [car2cyl, car2sph, cyl2car, cyl2sph, sph2car, sph2cyl] = Change_CS
+%   car2cyl(x,y,z)
+
+car2cyl = @cartesian_to_cylindrical;
+car2sph = @cartesian_to_spherical;
+cyl2car = @cylindrical_to_cartesian;
+cyl2sph = @cylindrical_to_spherical;
+sph2car = @spherical_to_cartesian;
+sph2cyl = @spherical_to_cylindrical;
+end
+
 % From Cartesian coordinates
 function [rho, theta_c, z] = cartesian_to_cylindrical(x,y,z)
 % Convert a point from cartesian to cylindrical coordinates
