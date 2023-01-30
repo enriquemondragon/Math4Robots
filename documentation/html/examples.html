@@ -1,0 +1,811 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Math4Robots - Examples</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-01-30"><meta name="DC.source" content="examples.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Math4Robots - Examples</h1><!--introduction--><p>Mathematical models are a powerful tool for representing geometric and dynamic aspects of robots. In this file you will see some examples of how the functions implemented in this toolbox can be used for robot modeling.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Cartesian, cylindrical and spherical coordinates</a></li><li><a href="#2">Rotation matrices</a></li><li><a href="#3">3D Rotation group SO(3)</a></li><li><a href="#4">Skew-Symmetric matrix</a></li><li><a href="#5">Matrix exponential</a></li><li><a href="#6">Rodigues rotation formula</a></li><li><a href="#7">Euler angles</a></li><li><a href="#8">Roll, Pitch and Yaw angles</a></li><li><a href="#9">Homogeneous transformation matrix</a></li><li><a href="#10">Denavit-Hartenberg</a></li><li><a href="#11">Inverse Kinematics - Newton-Raphson method</a></li></ul></div><h2 id="1">Cartesian, cylindrical and spherical coordinates</h2><p>You can convert points from one coordinate system to another. e.g. Convert the point (2,3,6) in the cartesian coordinate to the cylindrical.</p><pre class="codeinput">clear <span class="string">all</span>
+x = 2;
+y = 3;
+z = 6;
+[car2cyl, car2sph, cyl2car, cyl2sph, sph2car, sph2cyl] = Change_CS;
+[rho, theta_c, z] = car2cyl(x,y,z);
+rho, theta_c, z
+</pre><pre class="codeoutput">
+rho =
+
+    3.6056
+
+
+theta_c =
+
+    0.9828
+
+
+z =
+
+     6
+
+</pre><h2 id="2">Rotation matrices</h2><p>To generate a 3x3 rotation matrix you can call the functions from Rot_Matrix. Recall that the rotation matrices along the x, y and z axis are: <img src="examples_eq11232115157691625858.png" alt="$$ R_x = \pmatrix{1 &amp; 0 &amp; 0 \cr 0 &amp; cos(\theta) &amp; -sin(\theta) \cr 0 &amp; sin(\theta) &amp; cos(\theta) } $$" style="width:190px;height:54px;">, <img src="examples_eq11017929830149086920.png" alt="$$ R_y = \pmatrix{cos(\theta) &amp; 0 &amp; sin(\theta) \cr 0 &amp; 1 &amp; 0 \cr -sin(\theta) &amp; 0 &amp; cos(\theta) } $$" style="width:190px;height:54px;"> and <img src="examples_eq00363483084497318171.png" alt="$$ R_z = \pmatrix{cos(\theta) &amp; -sin(\theta) &amp; 0 \cr sin(\theta) &amp; cos(\theta) &amp; 0 \cr 0 &amp; 0 &amp; 1 } $$" style="width:190px;height:54px;">. e.g. Generate a rotation matrix that corresponds to a rotation of 90&deg; around the x axis and another that corresponds to -45&deg; in the z axis. You can input the angle in radians and in degrees (functions with suffix _d).</p><pre class="codeinput">[Rotx, Roty, Rotz, Rotx_d, Roty_d, Rotz_d] = Rot_Matrix;
+[Rx] = Rotx(pi/2)
+[Rz] = Rotz_d(-45)
+</pre><pre class="codeoutput">
+Rx =
+
+    1.0000         0         0
+         0    0.0000   -1.0000
+         0    1.0000    0.0000
+
+
+theta =
+
+   -0.7854
+
+
+Rz =
+
+    0.7071    0.7071         0
+   -0.7071    0.7071         0
+         0         0    1.0000
+
+</pre><h2 id="3">3D Rotation group SO(3)</h2><p>To check wether a matrix belongs to the SO(3) group you can use the function is_SO(3). Recall that: <img src="examples_eq13829992820083005151.png" alt="$$ SO(3) = {R \in R^{3x3}: RR^T = 1, det R = +1} $$" style="width:261px;height:18px;"> e.g. Check if a rotation matrix actually belongs to the SO(3) group</p><pre class="codeinput">R = Rotx(pi)*Roty(-pi/4)*Rotz(pi/2)
+is_SO3(R)
+<span class="comment">%e.g. matrix that does not belong to the rotation group SO(3)</span>
+M = eye(3) + 1
+is_SO3(M)
+</pre><pre class="codeoutput">
+R =
+
+    0.0000   -0.7071   -0.7071
+   -1.0000    0.0000   -0.0000
+    0.0000    0.7071   -0.7071
+
+
+RRT =
+
+    1.0000    0.0000   -0.0000
+    0.0000    1.0000   -0.0000
+   -0.0000   -0.0000    1.0000
+
+
+detR =
+
+     1
+
+	 Yes, it belongs to the SO(3) group 
+	 It meets the conditions: 
+	 det R = +1 
+ 	 R*R^T = I 
+
+M =
+
+     2     1     1
+     1     2     1
+     1     1     2
+
+
+RRT =
+
+     6     5     5
+     5     6     5
+     5     5     6
+
+
+detR =
+
+     4
+
+	 No, it does not belong to the SO(3) group 
+	 It does not meet the conditions: 
+	 det R = +1 
+ 	 R*R^T = I 
+</pre><h2 id="4">Skew-Symmetric matrix</h2><p>This function Generates a skew-symmetric matrix from an angular velocity vector <img src="examples_eq11234654951939652018.png" alt="$$\omega = \pmatrix{\omega_x \cr \omega_y \cr \omega_z} $$" style="width:71px;height:54px;">. Recall that the skew-symmetric matrix will have the form: <img src="examples_eq04329433746450631781.png" alt="$$ \hat{\omega} = \pmatrix{0 &amp; -\omega_z &amp; \omega_y \cr \omega_z &amp; 0 &amp; -\omega_x \cr -\omega_y &amp; \omega_x &amp; 0} $$" style="width:166px;height:54px;"> e.g.</p><pre class="codeinput">w = [4; 3; -2];
+w_hat = Skew_Symmetric(w);
+</pre><pre class="codeoutput">
+wx =
+
+     4
+
+
+wy =
+
+     3
+
+
+wz =
+
+    -2
+
+
+w_hat =
+
+     0     2     3
+    -2     0    -4
+    -3     4     0
+
+</pre><h2 id="5">Matrix exponential</h2><p>It generates the solution of the time derivative of rotation matrices. i.e. <img src="examples_eq03788628134507967542.png" alt="$$ e^{\hat{\omega}t} = I \frac{\hat{\omega}}{|\!|\omega|\!|} sin(|\!| \omega |\!| t) + \frac{\hat{\omega}^2}{|\!|\omega|\!|^2} (1-cos(|\!| \omega |\!|t)) $$" style="width:270px;height:37px;"></p><pre class="codeinput">syms <span class="string">t</span>
+e = @(t) Matrix_Exp(w, w_hat,t)
+fplot(e(t),[0 10])
+title(<span class="string">'Matrix exponential'</span>)
+xlabel(<span class="string">'e^{wt}'</span>)
+ylabel(<span class="string">'t'</span>)
+<span class="comment">% We can subtitute e.g. t = 1</span>
+t = 1
+subs(e)
+</pre><pre class="codeoutput">
+e =
+
+  function_handle with value:
+
+    @(t)Matrix_Exp(w,w_hat,t)
+
+
+I =
+
+     1     0     0
+     0     1     0
+     0     0     1
+
+ 
+e_wt =
+ 
+[                        0.4483*cos(5.3852*t) + 0.5517, 0.3714*sin(5.3852*t) - 0.4138*cos(5.3852*t) + 0.4138, 0.2759*cos(5.3852*t) + 0.5571*sin(5.3852*t) - 0.2759]
+[ 0.4138 - 0.3714*sin(5.3852*t) - 0.4138*cos(5.3852*t),                        0.6897*cos(5.3852*t) + 0.3103, 0.2069*cos(5.3852*t) - 0.7428*sin(5.3852*t) - 0.2069]
+[ 0.2759*cos(5.3852*t) - 0.5571*sin(5.3852*t) - 0.2759, 0.2069*cos(5.3852*t) + 0.7428*sin(5.3852*t) - 0.2069,                        0.8621*cos(5.3852*t) + 0.1379]
+ 
+
+t =
+
+     1
+
+
+I =
+
+     1     0     0
+     0     1     0
+     0     0     1
+
+ 
+e_wt =
+ 
+[                        0.4483*cos(5.3852*t) + 0.5517, 0.3714*sin(5.3852*t) - 0.4138*cos(5.3852*t) + 0.4138, 0.2759*cos(5.3852*t) + 0.5571*sin(5.3852*t) - 0.2759]
+[ 0.4138 - 0.3714*sin(5.3852*t) - 0.4138*cos(5.3852*t),                        0.6897*cos(5.3852*t) + 0.3103, 0.2069*cos(5.3852*t) - 0.7428*sin(5.3852*t) - 0.2069]
+[ 0.2759*cos(5.3852*t) - 0.5571*sin(5.3852*t) - 0.2759, 0.2069*cos(5.3852*t) + 0.7428*sin(5.3852*t) - 0.2069,                        0.8621*cos(5.3852*t) + 0.1379]
+ 
+ 
+ans =
+ 
+[ 0.8311, -0.1345, -0.5397]
+[ 0.4464,  0.7401,  0.5030]
+[ 0.3317, -0.6589,  0.6751]
+ 
+</pre><img vspace="5" hspace="5" src="examples_01.png" alt=""> <h2 id="6">Rodigues rotation formula</h2><p>Computes a rotation matrix given an axis and an angle of rotation using the Rodigues rotation formula. e.g.</p><pre class="codeinput">w = [4; 3; -2];
+theta = pi;
+[RodriguesRT, RodriguesRT_d] = Rodrigues_Formula
+[e] = RodriguesRT(w, theta);
+</pre><pre class="codeoutput">
+RodriguesRT =
+
+  function_handle with value:
+
+    @Rodrigues_Rot_Form
+
+
+RodriguesRT_d =
+
+  function_handle with value:
+
+    @Rodrigues_Rot_Form_d
+
+
+I =
+
+     1     0     0
+     0     1     0
+     0     0     1
+
+
+wx =
+
+     4
+
+
+wy =
+
+     3
+
+
+wz =
+
+    -2
+
+
+w_hat =
+
+     0     2     3
+    -2     0    -4
+    -3     4     0
+
+
+w_hat =
+
+     0     2     3
+    -2     0    -4
+    -3     4     0
+
+
+e =
+
+   -25    24   -16
+    24   -39   -12
+   -16   -12   -49
+
+</pre><h2 id="7">Euler angles</h2><p>Generate the rotation matrix ZYZ given the angles <img src="examples_eq05277272793441425192.png" alt="$$ \phi, \theta\ $$" style="width:22px;height:14px;"> and <img src="examples_eq00694084392161021884.png" alt="$$ \psi $$" style="width:10px;height:14px;">. As well as return the same angles given an Euler rotation matrix. e.g.</p><pre class="codeinput">phi = pi;
+theta = -pi/2;
+psi = pi/4;
+
+[RotZYZ, RotZYZ_d, EulerAngles] = Euler_Angles;
+[R_zyz] = RotZYZ(phi,theta,psi);
+
+R = Rotz(pi/2)*Roty(-pi/4)*Rotz(pi)
+[phi1,theta1,psi1,phi2,theta2,psi2] = EulerAngles(R)
+</pre><pre class="codeoutput">
+Roty =
+
+  function_handle with value:
+
+    @Rot_y
+
+
+Rotz =
+
+  function_handle with value:
+
+    @Rot_z
+
+
+R_zyz =
+
+   -0.0000   -0.0000    1.0000
+   -0.7071   -0.7071   -0.0000
+    0.7071   -0.7071    0.0000
+
+
+R =
+
+   -0.0000    1.0000   -0.0000
+   -0.7071   -0.0000   -0.7071
+   -0.7071   -0.0000    0.7071
+
+
+phi1 =
+
+   -1.5708
+
+
+theta1 =
+
+    0.7854
+
+
+psi1 =
+
+  -1.2246e-16
+
+
+phi2 =
+
+    1.5708
+
+
+theta2 =
+
+   -0.7854
+
+
+psi2 =
+
+    3.1416
+
+</pre><h2 id="8">Roll, Pitch and Yaw angles</h2><p>With these functions you can generate a rotation matrix ZYX. As well as get the Roll, Pitch and Yaw angles from a rotation matrix. e.g</p><pre class="codeinput">phi_r = pi;
+phi_p = -pi/2;
+phi_y = pi/4;
+
+[RotZYX, RotZYX_d, RollPitchYaw] = Roll_Pitch_Yaw;
+[R_zyx] = RotZYX(phi_r,phi_p,phi_y)
+
+R = Rotz(pi/2)*Roty(-pi/4)*Rotx(pi)
+[roll1,pitch1,yaw1,roll2,pitch2,yaw2] = RollPitchYaw(R)
+</pre><pre class="codeoutput">
+Rotx =
+
+  function_handle with value:
+
+    @Rot_x
+
+
+Roty =
+
+  function_handle with value:
+
+    @Rot_y
+
+
+Rotz =
+
+  function_handle with value:
+
+    @Rot_z
+
+
+R_zyx =
+
+   -0.0000    0.7071    0.7071
+    0.0000   -0.7071    0.7071
+    1.0000    0.0000    0.0000
+
+
+R_zyx =
+
+   -0.0000    0.7071    0.7071
+    0.0000   -0.7071    0.7071
+    1.0000    0.0000    0.0000
+
+
+R =
+
+    0.0000    1.0000    0.0000
+    0.7071   -0.0000    0.7071
+    0.7071    0.0000   -0.7071
+
+
+roll1 =
+
+    1.5708
+
+
+pitch1 =
+
+   -0.7854
+
+
+yaw1 =
+
+    3.1416
+
+
+roll2 =
+
+   -1.5708
+
+
+pitch2 =
+
+   -2.3562
+
+
+yaw2 =
+
+  -1.2246e-16
+
+</pre><h2 id="9">Homogeneous transformation matrix</h2><p>With these functions you can generate translation, rotation and homogeneous transformation matrices. Recall that a rotation matrix is a 4 by 4 matrix with the form: <img src="examples_eq10164736652381620574.png" alt="$$ HT = \pmatrix{ R &amp; T \cr 0 &amp; 1} $$" style="width:103px;height:36px;">. You can use either the radian's or degree's version. e.g.</p><pre class="codeinput">[Trans, Rotxg, Rotyg, Rotzg, Rotxg_d, Rotyg_d, Rotzg_d] = Hom_Transform;
+T = Trans([4; 2; -5])
+R = Rotxg(pi/4)*Rotxg_d(45)
+HT = T*R
+</pre><pre class="codeoutput">
+T =
+
+     1     0     0     4
+     0     1     0     2
+     0     0     1    -5
+     0     0     0     1
+
+
+R =
+
+    1.0000         0         0         0
+         0    0.0000   -1.0000         0
+         0    1.0000    0.0000         0
+         0         0         0    1.0000
+
+
+HT =
+
+    1.0000         0         0    4.0000
+         0    0.0000   -1.0000    2.0000
+         0    1.0000    0.0000   -5.0000
+         0         0         0    1.0000
+
+</pre><h2 id="10">Denavit-Hartenberg</h2><p>It generates a homogeneous transformation matrix using the Denavit-Hartenberg parameters <img src="examples_eq11333334605328822359.png" alt="$$ d, \theta, a $$" style="width:35px;height:14px;"> and <img src="examples_eq08163393176059642704.png" alt="$$ \alpha $$" style="width:9px;height:7px;"> as an input. e.g.</p><pre class="codeinput">d = 1;
+theta = pi;
+a = -3;
+alpha = -pi/2
+Denavit_Hartenberg(d, theta, a, alpha)
+</pre><pre class="codeoutput">
+alpha =
+
+   -1.5708
+
+
+ans =
+
+   -1.0000   -0.0000   -0.0000    3.0000
+    0.0000   -0.0000   -1.0000   -0.0000
+         0   -1.0000    0.0000    1.0000
+         0         0         0    1.0000
+
+</pre><h2 id="11">Inverse Kinematics - Newton-Raphson method</h2><p>You can find the joint variables from a certain position in the cartesian space using the Newton-Rapshon method. That is, you can use the Newton-Raphson method as the numerical approach for inverse kinematics. Recall than the Newton-Raphson method is given by: <img src="examples_eq00184927529260426479.png" alt="$$ x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)} $$" style="width:121px;height:35px;">. In inverse kinematics this has the form: <img src="examples_eq10219277291174413953.png" alt="$$ q_{k+1} = q_k + J^{-1} (q_k) (x_d - f(q)) $$" style="width:194px;height:18px;">. e.g. For a RR manipulator with 2 degrees of freedom.</p><pre class="codeinput">syms <span class="string">q1</span> <span class="string">q2</span> <span class="string">q3</span>
+l1 = 1; l2 = 1; l3 = 1;
+
+F = [l1*cos(q1) + l2*cos(q1+q2);
+     l1*sin(q1) + l2*sin(q1+q2)];
+
+x_d = [1.2; 1.2];
+q = [1; -1];
+epsilon = 1e-3;
+max_iter = 5;
+verify = true;
+
+[Qvalues] = InverseK_Newton(F,x_d, q, epsilon, max_iter, verify)
+
+InverseK_Newton(F,x_d, q, epsilon, max_iter, verify);
+</pre><pre class="codeoutput">
+	 Calculating:
+	 Jacobian w.r.t. q1 
+	 Jacobian w.r.t. q2 
+
+	 Size of the Jacobian matrix [2 2] 
+
+q1 =
+
+     1
+
+
+q2 =
+
+    -1
+
+
+q1 =
+
+    1.4044
+
+
+q2 =
+
+   -1.2644
+
+
+q1 =
+
+    1.3477
+
+
+q2 =
+
+   -1.1232
+
+
+q1 =
+
+    1.3430
+
+
+q2 =
+
+   -1.1152
+
+
+Qvalues =
+
+    1.3430
+   -1.1152
+
+
+q1 =
+
+    1.3430
+
+
+q2 =
+
+   -1.1152
+
+
+comp =
+
+    1.2000
+    1.2000
+
+
+Qvalues =
+
+    1.3430
+   -1.1152
+
+
+	 Calculating:
+	 Jacobian w.r.t. q1 
+	 Jacobian w.r.t. q2 
+
+	 Size of the Jacobian matrix [2 2] 
+
+q1 =
+
+     1
+
+
+q2 =
+
+    -1
+
+
+q1 =
+
+    1.4044
+
+
+q2 =
+
+   -1.2644
+
+
+q1 =
+
+    1.3477
+
+
+q2 =
+
+   -1.1232
+
+
+q1 =
+
+    1.3430
+
+
+q2 =
+
+   -1.1152
+
+
+Qvalues =
+
+    1.3430
+   -1.1152
+
+
+q1 =
+
+    1.3430
+
+
+q2 =
+
+   -1.1152
+
+
+comp =
+
+    1.2000
+    1.2000
+
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Math4Robots - Examples
+% Mathematical models are a powerful tool for representing geometric and
+% dynamic aspects of robots. In this file you will see some examples of how
+% the functions implemented in this toolbox can be used for robot modeling.
+
+%% Cartesian, cylindrical and spherical coordinates
+% You can convert points from one coordinate system to another.
+% e.g. Convert the point (2,3,6) in the cartesian coordinate to the
+% cylindrical.
+clear all
+x = 2; 
+y = 3; 
+z = 6;
+[car2cyl, car2sph, cyl2car, cyl2sph, sph2car, sph2cyl] = Change_CS;
+[rho, theta_c, z] = car2cyl(x,y,z);
+rho, theta_c, z
+
+%% Rotation matrices
+% To generate a 3x3 rotation matrix you can call the functions from 
+% Rot_Matrix.
+% Recall that the rotation matrices along the x, y and z axis are:
+% $$ R_x = \pmatrix{1 & 0 & 0 \cr 0 & cos(\theta) & -sin(\theta) \cr 0 &
+% sin(\theta) & cos(\theta) } $$, $$ R_y = \pmatrix{cos(\theta) & 0 &
+% sin(\theta) \cr 0 & 1 & 0 \cr -sin(\theta) & 0 & cos(\theta) } $$ and $$
+% R_z = \pmatrix{cos(\theta) & -sin(\theta) & 0 \cr sin(\theta) &
+% cos(\theta) & 0 \cr 0 & 0 & 1 } $$.
+% e.g. Generate a rotation matrix that corresponds to a rotation of 90°
+% around the x axis and another that corresponds to -45° in the z axis.
+% You can input the angle in radians and in degrees (functions with suffix
+% _d).
+[Rotx, Roty, Rotz, Rotx_d, Roty_d, Rotz_d] = Rot_Matrix;
+[Rx] = Rotx(pi/2)
+[Rz] = Rotz_d(-45)
+
+%% 3D Rotation group SO(3)
+% To check wether a matrix belongs to the SO(3) group you can use the
+% function is_SO(3). Recall that: $$ SO(3) = {R \in R^{3x3}: RR^T = 1, 
+% det R = +1} $$ e.g. Check if a rotation matrix actually belongs to the
+% SO(3) group
+R = Rotx(pi)*Roty(-pi/4)*Rotz(pi/2)
+is_SO3(R)
+%e.g. matrix that does not belong to the rotation group SO(3)
+M = eye(3) + 1
+is_SO3(M)
+
+%% Skew-Symmetric matrix
+% This function Generates a skew-symmetric matrix from an angular velocity
+% vector $$\omega = \pmatrix{\omega_x \cr \omega_y \cr \omega_z} $$. Recall
+% that the skew-symmetric matrix will have the form: 
+% $$ \hat{\omega} = \pmatrix{0 & -\omega_z & \omega_y \cr \omega_z & 0 & 
+% -\omega_x \cr -\omega_y & \omega_x & 0} $$
+% e.g.
+w = [4; 3; -2]; 
+w_hat = Skew_Symmetric(w);
+
+%% Matrix exponential
+% It generates the solution of the time derivative of rotation matrices.
+% i.e. $$ e^{\hat{\omega}t} = I \frac{\hat{\omega}}{|\!|\omega|\!|} 
+% sin(|\!| \omega |\!| t) + \frac{\hat{\omega}^2}{|\!|\omega|\!|^2}
+% (1-cos(|\!| \omega |\!|t)) $$
+syms t
+e = @(t) Matrix_Exp(w, w_hat,t)
+fplot(e(t),[0 10])
+title('Matrix exponential')
+xlabel('e^{wt}') 
+ylabel('t')
+% We can subtitute e.g. t = 1
+t = 1
+subs(e)
+
+%% Rodigues rotation formula
+% Computes a rotation matrix given an axis and an angle of rotation using
+% the Rodigues rotation formula. e.g.
+w = [4; 3; -2]; 
+theta = pi;
+[RodriguesRT, RodriguesRT_d] = Rodrigues_Formula
+[e] = RodriguesRT(w, theta);
+
+%% Euler angles
+% Generate the rotation matrix ZYZ given the angles $$ \phi, \theta\ $$ and
+% $$ \psi $$. As well as return the same angles given an Euler rotation
+% matrix. e.g.
+
+phi = pi; 
+theta = -pi/2;
+psi = pi/4;
+
+[RotZYZ, RotZYZ_d, EulerAngles] = Euler_Angles;
+[R_zyz] = RotZYZ(phi,theta,psi);
+
+R = Rotz(pi/2)*Roty(-pi/4)*Rotz(pi)
+[phi1,theta1,psi1,phi2,theta2,psi2] = EulerAngles(R)
+
+%% Roll, Pitch and Yaw angles
+% With these functions you can generate a rotation matrix ZYX. As well as
+% get the Roll, Pitch and Yaw angles from a rotation matrix. e.g
+
+phi_r = pi; 
+phi_p = -pi/2;
+phi_y = pi/4;
+
+[RotZYX, RotZYX_d, RollPitchYaw] = Roll_Pitch_Yaw;
+[R_zyx] = RotZYX(phi_r,phi_p,phi_y)
+
+R = Rotz(pi/2)*Roty(-pi/4)*Rotx(pi)
+[roll1,pitch1,yaw1,roll2,pitch2,yaw2] = RollPitchYaw(R)
+
+%% Homogeneous transformation matrix
+% With these functions you can generate translation, rotation and
+% homogeneous transformation matrices. Recall that a rotation matrix is a 4
+% by 4 matrix with the form: $$ HT = \pmatrix{ R & T \cr 0 & 1} $$.
+% You can use either the radian's or degree's version. e.g.
+[Trans, Rotxg, Rotyg, Rotzg, Rotxg_d, Rotyg_d, Rotzg_d] = Hom_Transform;
+T = Trans([4; 2; -5])
+R = Rotxg(pi/4)*Rotxg_d(45)
+HT = T*R
+
+%% Denavit-Hartenberg
+% It generates a homogeneous transformation matrix using the
+% Denavit-Hartenberg parameters $$ d, \theta, a $$ and $$ \alpha $$ as an
+% input. e.g.
+d = 1;
+theta = pi;
+a = -3;
+alpha = -pi/2
+Denavit_Hartenberg(d, theta, a, alpha)
+
+%% Inverse Kinematics - Newton-Raphson method
+% You can find the joint variables from a certain position in the cartesian
+% space using the Newton-Rapshon method. That is, you can use the
+% Newton-Raphson method as the numerical approach for inverse kinematics.
+% Recall than the Newton-Raphson method is given by:
+% $$ x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)} $$.
+% In inverse kinematics this has the form:
+% $$ q_{k+1} = q_k + J^{-1} (q_k) (x_d - f(q)) $$.
+% e.g. For a RR manipulator with 2 degrees of freedom.
+syms q1 q2 q3
+l1 = 1; l2 = 1; l3 = 1;
+
+F = [l1*cos(q1) + l2*cos(q1+q2);
+     l1*sin(q1) + l2*sin(q1+q2)];
+ 
+x_d = [1.2; 1.2];
+q = [1; -1];
+epsilon = 1e-3;
+max_iter = 5;
+verify = true;
+
+[Qvalues] = InverseK_Newton(F,x_d, q, epsilon, max_iter, verify)
+
+InverseK_Newton(F,x_d, q, epsilon, max_iter, verify);
+
+##### SOURCE END #####
+--></body></html>

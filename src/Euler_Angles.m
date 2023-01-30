@@ -9,7 +9,7 @@ function [RotZYZ, RotZYZ_d, EulerAngles] = Euler_Angles
 
 RotZYZ = @Rot_zyz;
 RotZYZ_d = @Rot_zyz_d;
-EulerAngles = @Euler_angles;
+EulerAngles = @euler_ang;
 
 end
 
@@ -37,7 +37,7 @@ function [R_zyz] = Rot_zyz_d(phi,theta,psi)
     
 end
 
-function [phi1,theta1,psi1,phi2,theta2,psi2] = Euler_angles(R)
+function [phi1,theta1,psi1,phi2,theta2,psi2] = euler_ang(R)
 % Returns the Euler angles from an Euler rotation matrix
 % {angle_name}1 is the result using the positive square root in theta
 % {angle_name}2 is the result using the negative square root in theta

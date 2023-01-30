@@ -21,7 +21,7 @@ function [Qvalues] = InverseK_Newton(F,x_d, q, epsilon, max_iter, verify)
     if nargin < 4
         epsilon = 1e-3;
         max_iter = 100;
-        verify = true
+        verify = true;
     end
     
     qs = symvar(F);

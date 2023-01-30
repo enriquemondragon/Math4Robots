@@ -1,7 +1,7 @@
 % HOMOGENEOUS TRANSFORMATION
 % ROTATION AND TRANSLATION
 
-% HOMOGENEOUS TRANSFORM --> TH = T*R
+% HOMOGENEOUS TRANSFORM --> HT = T*R
 
 function [Trans, Rotxg, Rotyg, Rotzg, Rotxg_d, Rotyg_d, Rotzg_d] = Hom_Transform
 % Usage:
