@@ -1,0 +1,11 @@
+<productinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="optional">
+    <?xml-stylesheet type="text/xsl"href="optional"?>
+     
+    <matlabrelease>R2019a</matlabrelease>
+    <name>Math4Robots</name>
+    <type>Mathematical Modeling of Robots Toolbox</type>
+    <icon></icon>
+    <help_location>documentation\html</help_location>
+  
+</productinfo>
