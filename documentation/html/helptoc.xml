@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding="utf-8"?>
 <toc version="2.0">
 
-    <tocitem target="mytoolbox.html">Math4Robots
-        <tocitem target="examples.html">Examples 
+    <tocitem target="examples.html">Examples 
     </tocitem>
 
 </toc>
