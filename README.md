@@ -21,6 +21,7 @@ Then, double click the [(.mltbx) Toolbox file](https://github.com/enriquemondrag
 You can view examples in the documentation.
 
 ![nebulae_nn](/documentation/documentation.png)
+
 --------
 ## Author
 Name: Enrique Mondragon Estrada
@@ -32,6 +33,8 @@ Mail: emondra99@gmail.com
 - Siciliano, B., Sciavicco, L., Villani, L., & Oriolo, G. (2008). *Robotics: Modelling, Planning and Control* (1st ed. 2009). Springer.
 - Spong, M. W., Hutchinson, S., & Vidyasagar, M. (2005). *Robot Modeling and Control* (1st ed. 1989). Wiley.
 
+--------
+## License
+Math4Robots is available under the MIT license. See the LICENSE file for more info.
 
-
-### Project under development
+Project under development
