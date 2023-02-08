@@ -19,6 +19,7 @@ You can clone the repository by using the command:
 Then, double click the [(.mltbx) Toolbox file](https://github.com/enriquemondragon/Math4Robots/blob/main/Math4Robots.mltbx) to install it.
 
 You can view examples in the documentation.
+
 ![nebulae_nn](/documentation/documentation.png)
 --------
 ## Author
@@ -33,4 +34,4 @@ Mail: emondra99@gmail.com
 
 
 
-Project under development
+### Project under development
