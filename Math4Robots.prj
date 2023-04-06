@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="1817734317" file="D:\EME\Documents\9_10_Invierno2023\Robotica_industrial\MATH4ROBOTS\Math4Robots\Math4Robots.prj" location="D:\EME\Documents\9_10_Invierno2023\Robotica_industrial\MATH4ROBOTS\Math4Robots" name="Math4Robots" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="2397674993" file="D:\EME\Documents\9_10_Invierno2023\Robotica_industrial\MATH4ROBOTS\Math4Robots\Math4Robots.prj" location="D:\EME\Documents\9_10_Invierno2023\Robotica_industrial\MATH4ROBOTS\Math4Robots" name="Math4Robots" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Math4Robots</param.appname>
     <param.authnamewatermark>Enrique Mondragon Estrada</param.authnamewatermark>
     <param.email>emondra99@gmail.com</param.email>
