@@ -2,7 +2,7 @@
     xsi:noNamespaceSchemaLocation="optional">
     <?xml-stylesheet type="text/xsl"href="optional"?>
      
-    <matlabrelease>R2019a</matlabrelease>
+    <matlabrelease>R2023a</matlabrelease>
     <name>Math4Robots</name>
     <type>Mathematical Modeling of Robots Toolbox</type>
     <icon></icon>
