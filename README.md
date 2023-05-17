@@ -28,7 +28,7 @@ You can view examples in the documentation.
 ## Author
 Name: Enrique Mondragon Estrada
 
-Mail: emondra99@gmail.com
+Mail: enriquemondragon@proton.me
 
 --------
 ## References
