@@ -5,7 +5,7 @@
 **Mathematical modeling of robots Toolbox.**
 
 <p align="center">
-    <img width=40% height=40% src="https://live.staticflickr.com/65535/52659241701_127a951ae6_m.jpg">
+    <img width=350 height=350 src="https://live.staticflickr.com/65535/52659241701_127a951ae6_m.jpg">
 </p>
 
 **Math4Robots** is a MATLAB Toolbox that implements some functions for mathematical modeling of robot manipulators. Mathematical models are a powerful tool for representing geometric and dynamic aspects of robots. That is why, the motivation behind this project, was to implement mathematical functions that could facilitate these tasks.
